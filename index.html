@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Обучение «AI-креатор» — Ярослав Монтана</title>
+<meta name="description" content="Пошаговое обучение созданию коммерческих AI-видео: от первой генерации до первого заказа. 9 990 ₽, доступ навсегда.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#111;--paper:#fff8ef;--paper2:#fffdf8;--yellow:#ffd93d;--salmon:#ff8d67;
+  --cyan:#69d8f0;--pink:#ff7aa5;--red:#eb5339;--green:#7ee08a;--dark:#1a1d22;
+  --b:4px solid var(--ink);--sh:6px 6px 0 var(--ink);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Space Grotesk",system-ui,sans-serif;color:var(--ink);background:#d6d6d6;line-height:1.55;font-size:17px}
+img,video{display:block;max-width:100%}
+a{color:inherit}
+.page{max-width:1080px;margin:16px auto;background:
+  linear-gradient(rgba(17,17,17,.06) 1px,transparent 1px) 0 0/28px 28px,
+  linear-gradient(90deg,rgba(17,17,17,.06) 1px,transparent 1px) 0 0/28px 28px,var(--paper2);
+  border:var(--b);box-shadow:10px 10px 0 var(--ink);overflow:hidden}
+.wrap{padding:0 56px}
+section{padding:64px 0}
+.mono{font-family:"Space Mono",monospace;text-transform:uppercase;letter-spacing:.12em;font-size:13px;font-weight:700}
+.bar{margin:28px 56px 0;background:var(--salmon);border:var(--b);box-shadow:var(--sh);text-align:center;padding:12px}
+.tag{display:inline-flex;align-items:center;gap:8px;background:#fff;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:6px 14px;font-weight:700;font-size:15px}
+.tag i{width:10px;height:10px;border-radius:50%;background:var(--red);border:2px solid var(--ink)}
+h1{font-size:clamp(40px,7.2vw,80px);line-height:1.02;letter-spacing:-.03em;font-weight:700;margin:22px 0 26px}
+h2{font-size:clamp(28px,4.2vw,44px);line-height:1.08;letter-spacing:-.02em;font-weight:700;margin-bottom:22px}
+h3{font-size:22px;line-height:1.2;font-weight:700;margin-bottom:10px}
+.hl{background:var(--yellow);box-shadow:6px 6px 0 var(--pink);padding:0 10px;display:inline-block;transform:rotate(-1deg)}
+.mark{background:var(--yellow);border:2px solid var(--ink);box-shadow:3px 3px 0 var(--pink);padding:2px 8px;font-weight:700;box-decoration-break:clone;-webkit-box-decoration-break:clone;line-height:2}
+.lead{font-size:20px;max-width:720px}
+p+p{margin-top:14px}
+.btn{display:inline-block;text-decoration:none;background:var(--cyan);border:var(--b);border-radius:6px;box-shadow:5px 5px 0 var(--ink),0 0 18px rgba(105,216,240,.35);padding:20px 46px;font-weight:700;font-size:21px;transition:transform .12s,box-shadow .12s;text-align:center}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--ink)}
+.btn:active{transform:translate(4px,4px);box-shadow:1px 1px 0 var(--ink)}
+.btn.big{font-size:24px;padding:24px 56px}
+.btn-note{font-size:14px;opacity:.7;margin-top:12px}
+.center{text-align:center}
+.card{background:#fff;border:var(--b);box-shadow:var(--sh);padding:28px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.label{display:inline-block;background:var(--salmon);border:var(--b);box-shadow:var(--sh);padding:14px 28px;margin-bottom:30px}
+.label.y{background:var(--yellow)}.label.c{background:var(--cyan)}.label.p{background:var(--pink)}
+.hero{display:grid;grid-template-columns:1.25fr .9fr;gap:40px;align-items:center}
+.photo{border:var(--b);box-shadow:10px 10px 0 var(--ink);background:var(--cyan);padding:10px;transform:rotate(1.5deg)}
+.photo img{border:3px solid var(--ink);width:100%;aspect-ratio:3/4;object-fit:cover}
+.stamp{position:absolute;background:var(--yellow);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:8px 12px;font-weight:700;font-size:15px;line-height:1.25}
+.clients{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.clients span{background:#fff;border:3px solid var(--ink);padding:6px 14px;font-weight:700;box-shadow:3px 3px 0 var(--ink)}
+.feat .num{font-family:"Space Mono",monospace;font-weight:700;font-size:42px;line-height:1;margin-bottom:14px}
+ul.check{list-style:none}
+ul.check li{position:relative;padding-left:34px;margin:12px 0}
+ul.check li:before{content:"";position:absolute;left:0;top:4px;width:18px;height:18px;background:var(--green);border:3px solid var(--ink)}
+ul.cross li:before{background:var(--pink)}
+ul.cross li:after{content:"×";position:absolute;left:5px;top:-3px;font-weight:700;font-size:18px}
+.dark{background:var(--dark);color:#fff8ef;border:var(--b);box-shadow:10px 10px 0 var(--ink);padding:40px}
+.dark .mark{color:var(--ink)}
+.story{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
+.pics{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pics img{border:var(--b);box-shadow:5px 5px 0 var(--ink);aspect-ratio:3/4;object-fit:cover;width:100%}
+.pics figure:nth-child(odd){transform:rotate(-1.5deg)}.pics figure:nth-child(even){transform:rotate(1.5deg) translateY(18px)}
+figcaption{font-family:"Space Mono",monospace;font-size:12px;margin-top:8px;text-transform:uppercase;letter-spacing:.06em}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:34px}
+.timeline .card{padding:18px}
+.timeline b{font-family:"Space Mono",monospace;display:block;font-size:13px;margin-bottom:6px}
+.works{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.work{border:var(--b);box-shadow:5px 5px 0 var(--ink);background:#000;position:relative}
+.work video{width:100%;aspect-ratio:16/9;object-fit:cover}
+.work span{position:absolute;left:8px;bottom:8px;background:var(--yellow);border:2px solid var(--ink);font-weight:700;font-size:13px;padding:2px 8px}
+.mod{display:grid;grid-template-columns:120px 1fr;gap:26px;padding:30px 0;border-top:3px dashed rgba(17,17,17,.35)}
+.mod:first-of-type{border-top:0}
+.mod .n{background:var(--yellow);border:var(--b);box-shadow:var(--sh);height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:"Space Mono",monospace;font-weight:700}
+.mod .n b{font-size:40px;line-height:1}
+.mod:nth-of-type(3n+2) .n{background:var(--cyan)}.mod:nth-of-type(3n) .n{background:var(--pink)}
+.res{background:#eaffe9;border:3px solid var(--ink);padding:12px 16px;margin-top:14px;font-weight:500}
+.res b{font-family:"Space Mono",monospace;font-size:12px;text-transform:uppercase;letter-spacing:.08em;display:block}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:0;border:var(--b);box-shadow:var(--sh)}
+.split>div{padding:28px;background:#fff}
+.split>div:first-child{background:var(--cyan);border-right:var(--b)}
+.shot{border:var(--b);box-shadow:var(--sh);background:#fff;padding:10px}
+.case{display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:center}
+.case img{border:var(--b);box-shadow:5px 5px 0 var(--ink);aspect-ratio:1;object-fit:cover}
+.price-card{max-width:620px;margin:0 auto;background:#fff;border:var(--b);box-shadow:12px 12px 0 var(--ink);padding:40px;position:relative}
+.price-card .ribbon{position:absolute;top:-22px;left:50%;transform:translateX(-50%) rotate(-2deg);background:var(--pink);border:var(--b);box-shadow:4px 4px 0 var(--ink);padding:6px 18px;white-space:nowrap}
+.old{font-family:"Space Mono",monospace;text-decoration:line-through;opacity:.55;font-size:20px}
+.price{font-size:72px;font-weight:700;color:#f0a000;-webkit-text-stroke:2px var(--ink);letter-spacing:-.02em;line-height:1}
+.compare{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.compare .card:nth-child(3){background:var(--yellow)}
+.compare .big{font-size:34px;font-weight:700;line-height:1.1;margin:8px 0}
+details{background:#fff;border:var(--b);box-shadow:5px 5px 0 var(--ink);margin-bottom:16px}
+summary{list-style:none;cursor:pointer;padding:20px 60px 20px 24px;font-weight:700;font-size:19px;position:relative}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";position:absolute;right:18px;top:50%;transform:translateY(-50%);width:30px;height:30px;border:3px solid var(--ink);background:var(--yellow);display:flex;align-items:center;justify-content:center;font-family:"Space Mono",monospace;font-size:20px}
+details[open] summary:after{content:"−";background:var(--cyan)}
+details>div{padding:0 24px 22px}
+.chairs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.chairs .card:nth-child(1){background:#f1f1f1}
+.chairs .card:nth-child(3){background:var(--green)}
+.final{background:var(--salmon);border-top:var(--b)}
+footer{border-top:var(--b);background:var(--dark);color:#fff8ef;padding:28px 56px;font-size:14px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.sticky{position:fixed;left:0;right:0;bottom:0;padding:10px 14px;background:rgba(255,248,239,.95);border-top:var(--b);display:none;z-index:9}
+.sticky .btn{display:block;padding:14px;font-size:18px}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+.reveal.on{opacity:1;transform:none}
+@media (max-width:860px){
+  body{font-size:16px}
+  .page{margin:0;border-left:0;border-right:0;box-shadow:none}
+  .wrap{padding:0 20px}.bar{margin:16px 20px 0}
+  section{padding:46px 0}
+  .hero,.story,.grid2,.grid3,.compare,.chairs,.split{grid-template-columns:1fr}
+  .split>div:first-child{border-right:0;border-bottom:var(--b)}
+  .timeline{grid-template-columns:1fr 1fr}
+  .works{grid-template-columns:1fr 1fr}
+  .mod{grid-template-columns:1fr;gap:16px}.mod .n{height:auto;flex-direction:row;gap:12px;padding:10px;justify-content:flex-start}
+  .mod .n b{font-size:28px}
+  .case{grid-template-columns:1fr}.case img{max-width:220px}
+  .price{font-size:56px}.price-card{padding:34px 22px}
+  .btn{padding:18px 26px;width:100%}
+  .dark{padding:26px}
+  footer{padding:24px 20px 90px}
+  .sticky{display:block}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="bar mono">Обучение «AI-креатор» · все уроки в записи · доступ навсегда</div>
+
+<!-- HERO -->
+<section class="wrap" style="padding-top:40px">
+  <div class="hero">
+    <div>
+      <span class="tag"><i></i>Набор открыт · начать можно сегодня</span>
+      <h1>Научись создавать <span class="hl">AI-видео</span>, за которые бизнес платит от 10 000 ₽</h1>
+      <p class="lead">Пошаговая система, по которой я за год прошёл путь от банкротства до 300 000 ₽ в месяц и роликов для Сбера, Магнита и Газпром Трансмедиа. Без опыта в видео, без дорогого железа — начать можно даже с телефона.</p>
+      <div style="margin-top:32px"><a class="btn big js-buy" href="#">Хочу на обучение</a>
+      <div class="btn-note">Кнопка откроет мою личку в Telegram — пришлю ссылку на оплату</div></div>
+    </div>
+    <div style="position:relative">
+      <div class="photo"><img src="assets/hero.jpg" alt="Ярослав Монтана"></div>
+      <div class="stamp" style="left:-18px;bottom:40px;transform:rotate(-4deg)">Ярослав Монтана<br><span style="font-weight:500">AI-креатор, владелец продакшена</span></div>
+      <div class="stamp" style="right:-10px;top:-14px;background:var(--pink);transform:rotate(5deg)">300 000 ₽ / мес</div>
+    </div>
+  </div>
+  <div class="clients"><span class="mono" style="background:var(--ink);color:#fff;letter-spacing:.08em">Мои клиенты:</span><span>Сбер</span><span>Магнит</span><span>Газпром Трансмедиа</span><span>МедиаБаскет</span><span>Лига Ставок</span></div>
+</section>
+
+<!-- 3 FEATURES -->
+<section class="wrap">
+  <div class="grid3">
+    <div class="card feat reveal"><div class="num">01</div><h3>Не нужен опыт в видео</h3><p>Год назад я не умел вообще ничего: ни монтажа, ни съёмки, ни дизайна. Обучение начинается с нуля и разжёвано так, что поймёт даже тот, кто ни разу не открывал нейросеть.</p></div>
+    <div class="card feat reveal" style="background:var(--yellow)"><div class="num">02</div><h3>Не нужен мощный компьютер</h3><p>Все нейросети работают в браузере. Есть отдельный блок о том, как создавать проекты прямо с телефона — без ноутбука.</p></div>
+    <div class="card feat reveal"><div class="num">03</div><h3>Окупается первым заказом</h3><p>Обучение стоит 9 990 ₽. Простой коммерческий ролик — от 10 000 ₽. Всё, что дальше, — твой заработок и навык на годы.</p></div>
+  </div>
+  <div class="center" style="margin-top:44px"><a class="btn js-buy" href="#">Забрать обучение за 9 990 ₽</a></div>
+</section>
+
+<!-- WHO -->
+<section class="wrap">
+  <div class="center"><span class="label mono">Кому подойдёт обучение</span></div>
+  <div class="grid2">
+    <div class="card reveal"><h3>Тебе сюда, если:</h3>
+      <ul class="check">
+        <li>хочешь новую профессию, которая кормит удалённо и без привязки к городу;</li>
+        <li>устал от работы «на дядю» или от бизнеса, который не растёт;</li>
+        <li>уже пробовал нейросети, но получается «мультяшно» и никто не покупает;</li>
+        <li>монтажёр, дизайнер, SMM-щик или фотограф и хочешь поднять чек;</li>
+        <li>готов не просто смотреть уроки, а повторять за мной и делать свои ролики.</li>
+      </ul></div>
+    <div class="card reveal" style="background:#ffe9ef"><h3>Не подойдёт, если:</h3>
+      <ul class="check cross">
+        <li>ждёшь кнопку «сделать красиво» без единого действия;</li>
+        <li>хочешь гарантированные 300 000 ₽ просто за факт оплаты;</li>
+        <li>не готов выделять хотя бы час в день на практику;</li>
+        <li>ищешь «волшебную нейросеть», а не систему работы.</li>
+      </ul></div>
+  </div>
+  <div class="dark reveal" style="margin-top:34px">
+    <p style="font-size:20px"><b>Нейросеть — это инструмент, а не профессия.</b> Без человека, который понимает идею, свет, композицию и задачу бизнеса, она выдаёт плоскую картинку, которую никто не купит.</p>
+    <p style="margin-top:16px"><span class="mark">Я учу не «нажимать кнопки», а делать видео, за которое платят.</span></p>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="wrap">
+  <div class="center"><span class="label y mono">Кто я и почему мне можно верить</span></div>
+  <div class="story">
+    <div class="reveal">
+      <h2>От долгов в 4,5 млн до 300 000 ₽ в месяц за один год</h2>
+      <p>4 года у меня был бизнес — магазины одежды. В последний год они дали ноль прибыли. Потом я вышел на Wildberries и потерял ещё 2 000 000 ₽.</p>
+      <p>Итог — банкротство, долги 4,5 млн и денег на пару месяцев жизни. Мне нужно было дело, которое быстро начнёт приносить деньги и не требует вложений.</p>
+      <p>Так я пришёл в AI-видео. Учился сам, с нуля: сотни часов тестов, сотни тысяч рублей на подписки и эксперименты. Первый заказ нашёл через объявление на Авито.</p>
+      <p><span class="mark">Сейчас у меня свой AI-продакшен, клиенты — крупные бренды, а средний доход — 300 000 ₽ в месяц.</span></p>
+      <p>Я переехал из Кемерово в Москву, путешествую и работаю откуда угодно — этой зимой с Бали.</p>
+    </div>
+    <div class="pics reveal">
+      <figure><img src="assets/shop.jpg" alt="Магазин Montana Shop"><figcaption>Мой магазин одежды</figcaption></figure>
+      <figure><img src="assets/shoes.jpg" alt="Магазин обуви"><figcaption>До банкротства</figcaption></figure>
+      <figure><img src="assets/workspace.jpg" alt="Рабочее место"><figcaption>Рабочее место в Москве</figcaption></figure>
+      <figure><img src="assets/bali.jpg" alt="Бали"><figcaption>Сейчас — Бали</figcaption></figure>
+    </div>
+  </div>
+  <div class="timeline">
+    <div class="card reveal"><b>ТОЧКА А</b>Банкротство, долги 4,5 млн</div>
+    <div class="card reveal" style="background:var(--cyan)"><b>МЕСЯЦ 1–2</b>Учусь сам, первый заказ с Авито</div>
+    <div class="card reveal" style="background:var(--yellow)"><b>МЕСЯЦ 6+</b>Поток клиентов из Instagram</div>
+    <div class="card reveal" style="background:var(--green)"><b>СЕЙЧАС</b>Сбер, Магнит, 300 000 ₽/мес</div>
+  </div>
+</section>
+
+<!-- WORKS -->
+<section class="wrap">
+  <div class="center"><span class="label c mono">Что я делаю этим навыком</span></div>
+  <h2 class="center">Эти ролики сгенерированы в нейросетях.<br>Ни одной реальной съёмки.</h2>
+  <div class="works" style="margin-top:30px">
+    <div class="work"><video src="assets/sber.mp4" poster="assets/sber.jpg" muted loop playsinline autoplay preload="none"></video><span>Сбер</span></div>
+    <div class="work"><video src="assets/frambini.mp4" poster="assets/frambini.jpg" muted loop playsinline autoplay preload="none"></video><span>Магнит</span></div>
+    <div class="work"><video src="assets/basket.mp4" poster="assets/basket.jpg" muted loop playsinline autoplay preload="none"></video><span>МедиаБаскет</span></div>
+    <div class="work"><video src="assets/liga.mp4" poster="assets/liga.jpg" muted loop playsinline autoplay preload="none"></video><span>Лига Ставок</span></div>
+    <div class="work"><video src="assets/avito.mp4" poster="assets/avito.jpg" muted loop playsinline autoplay preload="none"></video><span>Авито</span></div>
+    <div class="work"><video src="assets/ralph.mp4" poster="assets/ralph.jpg" muted loop playsinline autoplay preload="none"></video><span>Fashion</span></div>
+    <div class="work"><video src="assets/lit.mp4" poster="assets/lit.jpg" muted loop playsinline autoplay preload="none"></video><span>Lit Energy</span></div>
+    <div class="work"><video src="assets/hoodie.mp4" poster="assets/hoodie.jpg" muted loop playsinline autoplay preload="none"></video><span>Бренд одежды</span></div>
+  </div>
+  <p class="center" style="margin-top:28px">Один такой ролик для бренда — от 10 000 до 100 000 ₽. Проект для Лиги Ставок — 100 000 ₽.<br><b>В обучении я показываю, как сделан каждый.</b></p>
+</section>
+
+<!-- PROGRAM -->
+<section class="wrap">
+  <div class="center"><span class="label p mono">Программа обучения</span></div>
+  <h2 class="center">Весь мой путь за год — в пошаговой системе</h2>
+  <p class="center lead" style="margin:0 auto 20px">Только рабочие инструменты, которые дают самый качественный результат. Никакой воды и «обзоров всех нейросетей подряд».</p>
+
+  <div class="mod reveal"><div class="n"><b>01</b>блок</div><div>
+    <h3>Рабочее место: Weavy с компьютера и проекты с телефона</h3>
+    <p>Как устроен нодовый агрегатор Weavy, в котором я делаю все коммерческие проекты: одна схема — от референса до готового видео. И отдельно — как создавать проекты, если у тебя пока есть только телефон.</p>
+    <div class="res"><b>Результат</b>Рабочее место настроено, ты понимаешь, где и что генерировать.</div></div></div>
+
+  <div class="mod reveal"><div class="n"><b>02</b>блок</div><div>
+    <h3>Какая нейросеть для какой задачи</h3>
+    <p>Без перебора десятков сервисов: только те модели, которые дают коммерческое качество. Что брать для персонажа, что для продукта, что для локации — и почему.</p>
+    <div class="res"><b>Результат</b>Перестаёшь сливать деньги на подписки, которые не подходят.</div></div></div>
+
+  <div class="mod reveal"><div class="n"><b>03</b>блок</div><div>
+    <h3>Изображения в Nano Banana и GPT Image</h3>
+    <p>Лучшие модели генерации изображений на сегодня. Листы персонажа и продукта, консистентная внешность, замена локации, одежды и ракурсов, свет и композиция как в кино.</p>
+    <div class="res"><b>Результат</b>Кадры уровня рекламной съёмки, а не «нейросетевой мультик».</div></div></div>
+
+  <div class="mod reveal"><div class="n"><b>04</b>блок</div><div>
+    <h3>Видео в Seedance 2.5 и Kling 4</h3>
+    <p>Лучшие видеомодели. Как писать промты под движение камеры, физику, эффекты и монтаж — по готовой структуре, которой я пользуюсь в каждом проекте.</p>
+    <div class="res"><b>Результат</b>Живое кинематографичное видео из твоих кадров.</div></div></div>
+
+  <div class="mod reveal"><div class="n"><b>05</b>блок</div><div>
+    <h3>Разбор моих реальных коммерческих проектов</h3>
+    <p>Внутрянка роликов для брендов: от брифа и референсов до финальной версии, которую принял клиент. Видишь весь процесс, а не только красивый результат.</p>
+    <div class="res"><b>Результат</b>Понимаешь, как устроен ролик за 100 000 ₽ изнутри.</div></div></div>
+
+  <div class="mod reveal"><div class="n"><b>06</b>блок</div><div>
+    <h3>Монтаж в CapCut</h3>
+    <p>Финальная сборка: склейки, ритм, звук, цвет. Чтобы набор генераций превратился в готовый рекламный ролик.</p>
+    <div class="res"><b>Результат</b>Сдаёшь клиенту готовое видео, а не «нарезку».</div></div></div>
+
+  <div class="mod reveal"><div class="n"><b>07</b>блок</div><div>
+    <h3>Клиенты, цены и смета</h3>
+    <p>Где искать первых заказчиков, сколько брать и как презентовать стоимость. Даю свою смету — с ней заказов становится примерно на 50% больше.</p>
+    <div class="res"><b>Результат</b>Знаешь, где взять первый заказ и как назвать цену без страха.</div></div></div>
+
+  <div class="mod reveal"><div class="n"><b>08</b>блок</div><div>
+    <h3>Claude: управляем After Effects и Blender</h3>
+    <p>Как с помощью Claude управлять After Effects и Blender — 3D, графика и анимация без многолетнего изучения программ. Навык, который почти никто на рынке пока не даёт.</p>
+    <div class="res"><b>Результат</b>Делаешь то, за что другим платят как моушн-дизайнерам.</div></div></div>
+
+  <div class="split reveal" style="margin-top:40px">
+    <div><h3>Сопровождение</h3><ul class="check">
+      <li>месяц обратной связи от меня по любым вопросам;</li>
+      <li>закрытый чат креаторов — уже больше 100 участников.</li></ul></div>
+    <div><h3>Формат</h3><ul class="check">
+      <li>все уроки в записи — проходишь в своём темпе;</li>
+      <li>не нужно подстраиваться под даты и эфиры;</li>
+      <li>доступ навсегда.</li></ul></div>
+  </div>
+</section>
+
+<!-- MONEY -->
+<section class="wrap">
+  <div class="center"><span class="label y mono">Сколько на этом зарабатывают</span></div>
+  <div class="grid2" style="align-items:center">
+    <div class="reveal">
+      <h2>Реальные цены рынка — в моей смете</h2>
+      <p>Каждый ролик — это не «одна генерация», а набор услуг: сценарий, персонажи, локации, продукт, видео, звук. Смета показывает клиенту, за что он платит, а тебе — сколько стоит твоя работа.</p>
+      <p><span class="mark">Пример из сметы: два ролика по 30 секунд с персонажем и продуктом — 48 000 ₽.</span></p>
+      <p>Эту таблицу ты получишь в обучении и сможешь сразу отправлять клиентам.</p>
+    </div>
+    <div class="shot reveal" style="transform:rotate(1deg)"><img src="assets/smeta.jpg" alt="Смета на создание видео с помощью нейросетей"></div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section class="wrap">
+  <div class="center"><span class="label c mono">Результаты учеников</span></div>
+  <div class="card reveal case">
+    <img src="assets/kristina.jpg" alt="Кристина">
+    <div><h3>Кристина — работа в продакшене на 150 000 ₽ в месяц</h3>
+      <p>Пришла с сообщением: «Я два месяца без работы и не могу никуда устроиться». Опыт в AI был, но ролики получались плоскими. Подтянули базу кино и рекламы, собрали сильный проект в портфолио — и через 2 месяца её взяли в продакшн. Удалённо и с неполной занятостью.</p>
+      <p style="margin-top:12px"><a href="https://t.me/yaroslav_zavod/423" target="_blank" rel="noopener"><b>Читать её путь в канале →</b></a></p></div>
+  </div>
+  <div class="grid2" style="margin-top:24px">
+    <div class="card reveal" style="background:var(--yellow)"><h3>Василий — проекты на 70 000 ₽</h3><p>Прошёл обучение и уже сделал коммерческие проекты на 70 000 ₽.</p><p style="margin-top:12px"><a href="https://t.me/yaroslav_zavod/226" target="_blank" rel="noopener"><b>Смотреть в канале →</b></a></p></div>
+    <div class="card reveal"><h3>Марина</h3><p>Её история и работы после обучения.</p><p style="margin-top:12px"><a href="https://t.me/yaroslav_zavod/244" target="_blank" rel="noopener"><b>Смотреть в канале →</b></a></p></div>
+  </div>
+  <p class="center" style="margin-top:28px;font-size:19px">Не потому что у них особый талант. <b>Потому что у них появилась система — и они её применили.</b></p>
+</section>
+
+<!-- PRICE -->
+<section class="wrap" id="price">
+  <div class="center"><span class="label mono">Сколько стоит обучение</span></div>
+  <div class="compare">
+    <div class="card reveal"><div class="mono">Учиться самому</div><div class="big">~1 год</div><p>и сотни тысяч рублей на подписки, тесты и ролики, которые никто не купил. Я проверил это на себе.</p></div>
+    <div class="card reveal"><div class="mono">Похожие «потоки» у блогеров</div><div class="big">в 5–10 раз дороже</div><p>с привязкой к датам эфиров и упаковкой «уникального нового потока».</p></div>
+    <div class="card reveal"><div class="mono">Моё обучение</div><div class="big">9 990 ₽</div><p>Все уроки в записи, доступ навсегда, месяц связи со мной. Окупается одним роликом.</p></div>
+  </div>
+
+  <div class="price-card reveal" style="margin-top:60px">
+    <div class="ribbon mono">Обучение «AI-креатор»</div>
+    <ul class="check" style="margin:10px 0 26px">
+      <li>Weavy с компьютера и проекты с телефона</li>
+      <li>какая нейросеть для какой задачи</li>
+      <li>изображения в Nano Banana и GPT Image</li>
+      <li>видео в Seedance 2.5 и Kling 4</li>
+      <li>разбор моих коммерческих проектов</li>
+      <li>монтаж в CapCut</li>
+      <li>клиенты, цены и моя смета</li>
+      <li>Claude + After Effects и Blender</li>
+      <li>закрытый чат креаторов, 100+ участников</li>
+      <li>месяц обратной связи от меня</li>
+      <li>доступ навсегда</li>
+    </ul>
+    <div class="center">
+      <div class="mono" style="opacity:.7">Стоимость</div>
+      <div class="price">9 990 ₽</div>
+      <div style="margin-top:26px"><a class="btn big js-buy" href="#">Купить обучение</a></div>
+      <div class="btn-note">Откроется моя личка в Telegram с готовым сообщением —<br>отправь его, и я пришлю ссылку на оплату</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="wrap">
+  <div class="center"><span class="label y mono">Ответы на вопросы и сомнения</span></div>
+  <details><summary>У меня нет никакого опыта в видео. Получится?</summary><div><p>У меня тоже не было. Обучение начинается с нуля: я разжевал всё даже для тех, кто никогда не работал с изображениями и видео. Ты повторяешь за мной шаг за шагом на реальных проектах.</p></div></details>
+  <details><summary>Нужен мощный компьютер?</summary><div><p>Нет. Все нейросети работают в браузере — нагрузка на их серверах. Подойдёт обычный ноутбук, а начать можно даже с телефона: этому посвящён отдельный блок.</p></div></details>
+  <details><summary>Сколько нужно тратить на нейросети?</summary><div><p>Минимум для уверенного старта: подписка на агрегатор, где есть все нейросети, — 4 500 ₽, и подписка на языковую модель (Claude, ChatGPT или Gemini — подойдёт любая) — около 1 000–3 000 ₽ в зависимости от того, где покупаешь. Дальше — по необходимости. Я показываю, на что не стоит тратить деньги вообще.</p></div></details>
+  <details><summary>Сколько времени нужно на обучение?</summary><div><p>Все уроки в записи, проходишь в своём темпе. Достаточно часа в день. Доступ навсегда — можно возвращаться к урокам, когда появится новый проект.</p></div></details>
+  <details><summary>Рынок уже перенасыщен?</summary><div><p>Тех, кто генерирует картинки, — много. Тех, кто делает коммерческий результат, который решает задачу бизнеса, — мало. Компании активно ищут именно таких, и обучение как раз про это.</p></div></details>
+  <details><summary>Нейросети скоро всё будут делать сами — профессия умрёт?</summary><div><p>Происходит обратное: чем мощнее нейросети, тем больше бизнесу нужны люди, которые понимают идею, свет, композицию и умеют довести ролик до результата. Нейросеть — инструмент, а платят тому, кто им владеет.</p></div></details>
+  <details><summary>Почему так недорого? В чём подвох?</summary><div><p>Подвоха нет. Я не продаю «поток с эфирами» — всё в записи, поэтому могу сделать цену доступной. Мне важно, чтобы обучение окупалось первым же заказом.</p></div></details>
+  <details><summary>Чем это отличается от бесплатных роликов на YouTube?</summary><div><p>На YouTube — обрывки: один сервис, одна фишка, без связи с деньгами. Здесь — система целиком: от выбора инструментов до готового ролика, сметы и поиска клиентов. Плюс разборы реальных коммерческих проектов, чат и месяц связи со мной.</p></div></details>
+  <details><summary>А если у меня что-то не получится?</summary><div><p>Для этого есть месяц обратной связи: пишешь мне любой вопрос — по генерации, промтам, клиентам или цене. И закрытый чат, где больше 100 креаторов делятся опытом.</p></div></details>
+  <details><summary>Как найти первого клиента?</summary><div><p>В обучении есть отдельный блок: где искать первые заказы, как писать смету и сколько брать. Я сам нашёл первого клиента через объявление на Авито.</p></div></details>
+  <details><summary>Как оплатить и когда я получу доступ?</summary><div><p>Нажми любую кнопку «Купить» — откроется моя личка в Telegram с готовым сообщением. Отправь его, и я пришлю ссылку на оплату. После оплаты сразу открою доступ к урокам и чату.</p></div></details>
+</section>
+
+<!-- CHAIRS -->
+<section class="wrap">
+  <div class="center"><span class="label p mono">Сейчас у тебя три варианта</span></div>
+  <div class="chairs">
+    <div class="card reveal"><div class="mono">Вариант 1</div><h3 style="margin-top:8px">Оставить всё как есть</h3><p>Смотреть на чужие AI-ролики, думать «надо бы разобраться» и через полгода оказаться в той же точке.</p></div>
+    <div class="card reveal"><div class="mono">Вариант 2</div><h3 style="margin-top:8px">Разбираться самому</h3><p>Можно. Мне это стоило года, сотен часов тестов и сотен тысяч рублей на подписки, которые не подошли.</p></div>
+    <div class="card reveal"><div class="mono">Вариант 3</div><h3 style="margin-top:8px">Забрать готовую систему</h3><p>Пройти путь за пару месяцев, а не за год. И окупить обучение первым же роликом.</p></div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="final">
+  <div class="wrap center">
+    <h2>Через 2 месяца ты можешь уже получать деньги за AI-ролики</h2>
+    <p class="lead" style="margin:0 auto">Год моих проб и ошибок — в одном обучении. 9 990 ₽ — один ролик, и курс окупился.</p>
+    <div style="margin-top:34px"><a class="btn big js-buy" href="#">Купить обучение за 9 990 ₽</a></div>
+    <div class="btn-note" style="opacity:.85">Есть вопрос? Нажми ту же кнопку и задай его — отвечу лично.</div>
+  </div>
+</section>
+
+<footer>
+  <div>Ярослав Монтана · AI-креатор</div>
+  <div><a href="https://t.me/yaroslav_zavod" target="_blank" rel="noopener">Telegram-канал</a> · <a href="https://t.me/montana_yaroslav" target="_blank" rel="noopener">Написать мне</a></div>
+</footer>
+</div>
+
+<div class="sticky"><a class="btn js-buy" href="#">Купить обучение · 9 990 ₽</a></div>
+
+<script>
+const DM='https://t.me/montana_yaroslav?text='+encodeURIComponent('Привет! Хочу купить обучение «AI-креатор» за 9 990 ₽. Пришли, пожалуйста, ссылку на оплату.');
+document.querySelectorAll('.js-buy').forEach(a=>{a.href=DM;a.target='_blank';a.rel='noopener'});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
